@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         int id = Integer.parseInt(item.id)+1;
-        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_SHORT).show();
     }
 
 }
