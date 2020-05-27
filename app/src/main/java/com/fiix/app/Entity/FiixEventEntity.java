@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class FiixEventEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     public String title;

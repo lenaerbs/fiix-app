@@ -30,7 +30,7 @@ public class FiixGetCalendarAsyncTask extends AsyncTask<Void, Void, ArrayList<Fi
     @Override
     protected ArrayList<FiixEventEntity> doInBackground(Void... voids) {
         ArrayList<FiixEventEntity> copyList = new ArrayList<FiixEventEntity>();
-        FiixDatabase database = Room.databaseBuilder(this.mainActivity, FiixDatabase.class, "fiix-db15")
+        FiixDatabase database = Room.databaseBuilder(this.mainActivity, FiixDatabase.class, "fiix-db16")
                 .allowMainThreadQueries()   //Allows room to do operation on main thread
                 .build();
         if (!this.mainActivity.isNetworkConnected()) {
@@ -41,10 +41,15 @@ public class FiixGetCalendarAsyncTask extends AsyncTask<Void, Void, ArrayList<Fi
                 FiixEventEntity f = new FiixEventEntity();
                 //f.startDateFormatted = ev.startDateFormatted;
                 f.title = ev.title;
+                f.isInPast = ev.isInPast;
+                f.start = ev.start;
+                f.startDateFormatted = ev.startDateFormatted;
+                f.startTime = ev.startTime;
                 copyList.add(f);
             }
             database.close();
         } else {
+            database.eventDao().deleteAllEvents();
             List<FiixCalendarEntity> calendars = database.calendarDao().getFiixCalendars();
             ArrayList<String> codes = new ArrayList<String>();
             for(int i=0; i<calendars.size(); i++){
@@ -65,6 +70,7 @@ public class FiixGetCalendarAsyncTask extends AsyncTask<Void, Void, ArrayList<Fi
                         f.startTime = ev.startTime;
                         if(!ev.isInPast) {
                             copyList.add(f);
+                            database.eventDao().insertEvents(f);
                         }
                     }
                 }
@@ -79,6 +85,7 @@ public class FiixGetCalendarAsyncTask extends AsyncTask<Void, Void, ArrayList<Fi
                         f.startTime = ev.startTime;
                         if(!ev.isInPast) {
                             copyList.add(f);
+                            database.eventDao().insertEvents(f);
                         }
                     }
                 }
@@ -93,9 +100,11 @@ public class FiixGetCalendarAsyncTask extends AsyncTask<Void, Void, ArrayList<Fi
                         f.startTime = ev.startTime;
                         if(!ev.isInPast) {
                             copyList.add(f);
+                            database.eventDao().insertEvents(f);
                         }
                     }
                 }
+                database.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -16,5 +16,8 @@ public interface FiixEventDao {
 
     @Query("SELECT * FROM FiixEventEntity")
     public List<FiixEventEntity> getFiixEvents();
+
+    @Query("DELETE FROM FiixEventEntity")
+    public void deleteAllEvents();
 }
 

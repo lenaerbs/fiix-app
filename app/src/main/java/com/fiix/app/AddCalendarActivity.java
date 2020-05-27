@@ -19,7 +19,7 @@ public class AddCalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_calendar);
 
-        FiixDatabase database = Room.databaseBuilder(this, FiixDatabase.class, "fiix-db15")
+        FiixDatabase database = Room.databaseBuilder(this, FiixDatabase.class, "fiix-db16")
                 .allowMainThreadQueries()   //Allows room to do operation on main thread
                 .build();
         List<FiixCalendarEntity> calendars = database.calendarDao().getFiixCalendars();
@@ -42,7 +42,7 @@ public class AddCalendarActivity extends AppCompatActivity {
 
 
     protected void saveCalendars() {
-        FiixDatabase database = Room.databaseBuilder(this, FiixDatabase.class, "fiix-db15")
+        FiixDatabase database = Room.databaseBuilder(this, FiixDatabase.class, "fiix-db16")
                 .allowMainThreadQueries()   //Allows room to do operation on main thread
                 .build();
 

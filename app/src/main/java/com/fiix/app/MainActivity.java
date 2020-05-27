@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
 
         // Dasebase save and get
-        FiixDatabase database = Room.databaseBuilder(this, FiixDatabase.class, "fiix-db15")
+        FiixDatabase database = Room.databaseBuilder(this, FiixDatabase.class, "fiix-db16")
                 .allowMainThreadQueries()   //Allows room to do operation on main thread
                 .build();
 
@@ -184,7 +184,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         int id = Integer.parseInt(item.id)+1;
-        Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), String.valueOf(id)
+                , Toast.LENGTH_SHORT).show();
     }
 
 }
